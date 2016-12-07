@@ -1,0 +1,20 @@
+{
+    "env": {
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "indent": ["error", 2],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "strict": ["warn"],
+        "keyword-spacing": ["error"],
+        "eqeqeq": ["warn"],
+        "comma-dangle": [2, "never"],
+        "comma-spacing": [2, { "before": false, "after": true }],
+        "comma-style": [2, "last"],
+        "no-unused-vars": ["warn"],
+        "key-spacing": ["error"]
+    }
+}
+  
