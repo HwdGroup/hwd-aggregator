@@ -2,6 +2,7 @@
 
 var Aggregator = require('../src/index');
 var mock = require('./mocks/stream_5');
+var mockEdge = require('./mocks/edge_cases');
 
 /**
  * Main tests
@@ -86,5 +87,50 @@ describe('Aggragation Spec', function() {
     expect(spent).toEqual(2.2);
   });
 
+  /**
+   * Test integer aggregation
+   * Make a new aggregation and check first item
+   */
+  it ('should aggregate an array of objects', function() {
+    aggregator.aggregate(mock);
+    var res = aggregator.results();
+    expect(Object.keys(res).length).toEqual(2);
+  });
+
+  it ('should return 0 for all values', function() {
+    for (var i=0; i< mockEdge.length; i++) {
+      aggregator.aggregate(mockEdge[i]);
+    }
+
+    var res = aggregator.results();
+    var obj = res['4a30d2549b1a1ecae37790e2ac7a3770'];
+
+    expect(obj.impressions).toEqual(0);
+    expect(obj.clicks).toEqual(0);
+    expect(obj.spent).toEqual(0);
+  });
+
+  it ('should return sum for 6 decimal floats', function() {
+    for (var i=0; i< mockEdge.length; i++) {
+      aggregator.aggregate(mockEdge[i]);
+    }
+
+    var res = aggregator.results();
+    var spent = res['29ae806c615805fa243735f61a984189'].spent;
+
+    expect(spent).toEqual(0.000111);
+  });
+
+  it ('should return accurate sum for negative numbers', function() {
+    for (var i=0; i< mockEdge.length; i++) {
+      aggregator.aggregate(mockEdge[i]);
+    }
+
+    var res = aggregator.results();
+    // First element in results
+    var spent = res['33f93e1b8c353cacc0c53a7369d14fc3'].spent;
+
+    expect(spent).toEqual(0.10);
+  });
 
 });

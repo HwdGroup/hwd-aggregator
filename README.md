@@ -41,8 +41,16 @@ aggregator.setConfig({
   }
 });
 
-// Aggregate object
+// Aggregate single object
 aggregator.aggregate({some: 'object});
+
+// Other option is batch aggregation
+var array = [
+  {some: 'object}, 
+  {other: 'object}
+];
+aggregator.aggregate(array);
+
 
 // Get results
 let results = aggregator.results();

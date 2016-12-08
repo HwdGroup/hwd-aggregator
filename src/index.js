@@ -1,6 +1,7 @@
 'use strict';
 
 var MD5 = require('crypto-js/md5');
+var Big = require('bignumber.js');
 
 /**
  * Export main function
@@ -107,6 +108,38 @@ module.exports = function () {
     return MD5(JSON.stringify(objToHash)).toString();
   }
 
+  /**
+   * Logic for aggregate values
+   * @private
+   * @param {Object} record Object to aggregate
+   * @return Void
+   */
+  function makeAggregation(record) {
+    var id = makeHash(record);
+    var item = {};
+
+    item = ( ! base[id] ) ?
+      makeBaseRecord(record):
+      base[id];
+
+    for (var key in config.increment) {
+      if (record[key] !== undefined) {
+        if (config.increment[key].type === 'integer') {
+          item[key] += parseInt(record[key]);
+        }
+        if (config.increment[key].type === 'float') {
+          item[key] = parseFloat(
+            new Big(item[key])
+              .plus(record[key])
+              .toString()
+            );
+        }
+      }
+    }
+
+    base[id] = item;
+  }
+
   /**************************************
    * PUBLIC METHODS BELOW THIS LINE
    *************************************/
@@ -132,29 +165,17 @@ module.exports = function () {
   /**
    * Logic to aggregate values to base object
    * @public
+   * @param rawRecord Can be Object or Array
    * @returns Void
    */
   function aggregate(rawRecord) {
-    
-    var id = makeHash(rawRecord);
-    var item = {};
-
-    item = ( ! base[id] ) ?
-      makeBaseRecord(rawRecord):
-      base[id];
-
-    for (var key in config.increment) {
-      if (rawRecord[key] !== undefined) {
-        if (config.increment[key].type === 'integer') {
-          item[key] += parseInt(rawRecord[key]);
-        }
-        if (config.increment[key].type === 'float') {
-          item[key] += parseFloat(rawRecord[key]);
-        }
+    if (Array.isArray(rawRecord)) {
+      for (var i = 0, len = rawRecord.length; i < len; i++) {
+        makeAggregation(rawRecord[i]);
       }
+    } else {
+      makeAggregation(rawRecord);
     }
-
-    base[id] = item;
   }
 
   /**

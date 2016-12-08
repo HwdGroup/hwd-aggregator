@@ -10,6 +10,7 @@
     "coverage": "istanbul cover --include-all-sources jasmine"
   },
   "dependencies": {
+    "bignumber.js": "^3.0.1",
     "crypto-js": "3.1.x"
   },
   "devDependencies": {
@@ -23,12 +24,12 @@
     "aggregation",
     "aggregation library"
   ],
-  "repository": { 
+  "repository": {
     "type": "git",
     "url": "https://github.com/HwdGroup/hwd-aggregator.git"
   },
-  "engines": { 
-    "node": ">=0.12" 
+  "engines": {
+    "node": ">=0.12"
   },
   "author": "Headway Digital",
   "license": "MIT"
