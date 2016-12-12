@@ -7,7 +7,8 @@
     "test": "jasmine",
     "lint": "eslint ./ --format table",
     "lint-fix": "eslint ./ --fix --format table",
-    "coverage": "istanbul cover --include-all-sources jasmine"
+    "coverage": "istanbul cover --include-all-sources jasmine",
+    "benchmark": "node ./benchmark/benchmark.js"
   },
   "dependencies": {
     "bignumber.js": "^3.0.1",

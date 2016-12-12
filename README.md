@@ -56,3 +56,28 @@ aggregator.aggregate(array);
 let results = aggregator.results();
 ```
 
+## Scripts
+Run all tests
+```
+npm run test
+```
+
+Lint all code and show error/warnings
+```
+npm run lint
+```
+
+Lint all code show error/warnings and automatically fix code
+```
+npm run lint-fix
+```
+
+Run istanbul to generate coverage folder 
+```
+npm run coverage
+```
+
+Run benchmark in base of one file (preferably plain text with one json per line)
+```
+npm run benchmark -- ./benchmark/someFile.log
+```
