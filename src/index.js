@@ -1,6 +1,6 @@
 'use strict';
 
-var MD5 = require('crypto-js/md5');
+var crypto = require('crypto');
 var Big = require('bignumber.js');
 
 /**
@@ -105,7 +105,9 @@ module.exports = function () {
       }
     }
 
-    return MD5(JSON.stringify(objToHash)).toString();
+    return crypto.createHash('md5')
+      .update(JSON.stringify(objToHash))
+      .digest('hex');
   }
 
   /**

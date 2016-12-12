@@ -11,8 +11,7 @@
     "benchmark": "node ./benchmark/benchmark.js"
   },
   "dependencies": {
-    "bignumber.js": "^3.0.1",
-    "crypto-js": "3.1.x"
+    "bignumber.js": "3.0.x"
   },
   "devDependencies": {
     "eslint": "3.10.x",
