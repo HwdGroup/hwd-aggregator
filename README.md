@@ -42,12 +42,12 @@ aggregator.setConfig({
 });
 
 // Aggregate single object
-aggregator.aggregate({some: 'object});
+aggregator.aggregate({some: 'object'});
 
 // Other option is batch aggregation
 var array = [
-  {some: 'object}, 
-  {other: 'object}
+  {some: 'object'}, 
+  {other: 'object'}
 ];
 aggregator.aggregate(array);
 
