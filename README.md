@@ -14,14 +14,16 @@ Consider this example with this set of records:
 ```
 {"campaingId":28,"impressions":1,"spent":0.01}
 {"campaingId":28,"impressions":2,"spent":0.10}
-{"campaingId":28,"impressions":3,"spent":0.09}
-{"campaingId":28,"impressions":4,"spent":0.10}
+{"campaingId":28,"impressions":3,"spent":0.13}
+{"campaingId":45,"impressions":4,"spent":0.09}
+{"campaingId":45,"impressions":4,"spent":0.09}
 ```
 
 After aggregate and grouping by campaignId you will get:
 ```
 {
-  254a86bfca1f75c6ac8541f866707e90: {impressions:10, spent:0.30}
+  254a86bfca1f75c6ac8541f866707e90: {campaingId:28, impressions:6, spent:0.24},
+  a541b7ae3ab8ef7cf8cd3c47f823fc88: {campaingId:45, impressions:8, spent:0.18}
 }
 ```
 
@@ -29,7 +31,7 @@ In each collection you will get a unique hash ID (254a86bfca1f75c6ac8541f866707e
 generated with values of groupBy configuration. 
 
 ## Usage
-```
+```javascript
 const aggregator = require('hwd-aggregator');
 
 // Configure how to aggregate
