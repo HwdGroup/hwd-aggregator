@@ -194,7 +194,6 @@ module.exports = function () {
    * @return Void
    */
   function reset() {
-    config = {};
     base = {};
   }
 
