@@ -32,7 +32,8 @@ generated with values of groupBy configuration.
 
 ## Usage
 ```javascript
-const aggregator = require('hwd-aggregator');
+const Aggregator = require('hwd-aggregator');
+const aggregator = new Aggregator();
 
 // Configure how to aggregate
 aggregator.setConfig({
@@ -56,6 +57,10 @@ aggregator.aggregate(array);
 
 // Get results
 let results = aggregator.results();
+
+// Reset internal aggegator counter
+aggregator.reset();
+
 ```
 
 ## Scripts
