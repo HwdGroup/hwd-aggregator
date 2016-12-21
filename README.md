@@ -22,17 +22,18 @@ Consider this example with this set of records:
 After aggregate and grouping by campaignId you will get:
 ```
 {
-  254a86bfca1f75c6ac8541f866707e90: {campaingId:28, impressions:6, spent:0.24},
-  a541b7ae3ab8ef7cf8cd3c47f823fc88: {campaingId:45, impressions:8, spent:0.18}
+  867d29864a70187f6ad78d190f944193: {campaingId:28, impressions:6, spent:0.24},
+  fc67dbd2d170a175032ad8e0b6e9f51f: {campaingId:45, impressions:8, spent:0.18}
 }
 ```
 
-In each collection you will get a unique hash ID (254a86bfca1f75c6ac8541f866707e90)
+In each collection you will get a unique hash ID (867d29864a70187f6ad78d190f944193)
 generated with values of groupBy configuration. 
 
 ## Usage
 ```javascript
-const aggregator = require('hwd-aggregator');
+const Aggregator = require('hwd-aggregator');
+const aggregator = new Aggregator();
 
 // Configure how to aggregate
 aggregator.setConfig({
@@ -56,9 +57,17 @@ aggregator.aggregate(array);
 
 // Get results
 let results = aggregator.results();
+
+// Reset internal aggegator counter
+aggregator.reset();
+
 ```
 
-## Scripts
+## Check this example in action
+[https://runkit.com/juanem1/585a8074d1cdae00144bd526](https://runkit.com/juanem1/585a8074d1cdae00144bd526)
+
+
+## Development scripts
 Run all tests
 ```
 npm run test
@@ -69,7 +78,7 @@ Lint all code and show error/warnings
 npm run lint
 ```
 
-Lint all code show error/warnings and automatically fix code
+Lint all code, show error/warnings and automatically fix code
 ```
 npm run lint-fix
 ```
