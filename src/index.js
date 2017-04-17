@@ -36,7 +36,7 @@ module.exports = function () {
     // Add metadata
     for (var i = 0, len = config.groupBy.length; i < len; i++) {
       var field = config.groupBy[i];
-      increment[field] = rawRecord[field];
+      increment[field] = rawRecord[field] || null;
     }
 
     return increment;
