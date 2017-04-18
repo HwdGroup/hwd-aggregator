@@ -43,6 +43,18 @@ describe('Aggragation Spec', function() {
   });
 
   /**
+   * Test reset method
+   */
+  it ('should set to null keys that are not defined', function() {
+    aggregator.aggregate({impressions: 1, clicks: 1, campaingId: 1});
+    aggregator.aggregate({impressions: 1, clicks: 1, campaingId: 1});
+
+    var res = aggregator.results();
+    
+    expect(res['be0d5b49d4e93d78b22427ce4b4d17c3'].adId).toEqual(null);
+  });
+
+  /**
    * Test number of results
    */
   it ('should return 2 rows in total', function() {
