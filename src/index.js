@@ -96,14 +96,12 @@ module.exports = function () {
    * @returns {String} MD5 string
    */
   function makeHash(record) {
-    var objToHash = {};
-    for (var item in record) {
-      for (var i = 0, gLen = config.groupBy.length; i < gLen; i++) {
-        if (item === config.groupBy[i]) {
-          objToHash[item] = record[item];
-        }
+    var objToHash = config.groupBy.reduce(function(acc, field) {
+      if (record.hasOwnProperty(field)) {
+        acc[field] = record[field];
       }
-    }
+      return acc;
+    }, {});
 
     return crypto.createHash('md5')
       .update(JSON.stringify(objToHash))
